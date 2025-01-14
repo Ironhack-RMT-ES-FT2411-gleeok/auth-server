@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken")
 
 function verifyToken(req, res, next) {
+  // 1. verificar que el token es valido
+  // 2. extraer el payload (saber quien es el dueño de ese token) para hacerselo saber tanto a las rutas de backend como al frontend.
 
   try {
     
@@ -22,6 +24,17 @@ function verifyToken(req, res, next) {
 
 }
 
+function verifyAdmin(req, res, next) {
+
+  if (req.payload.role === "admin") {
+    next() // continua con la ruta
+  } else {
+    res.status(401).json({errorMessage: "Ruta solo para usuarios de tipo admin"})
+  }
+
+}
+
 module.exports = {
-  verifyToken
+  verifyToken,
+  verifyAdmin
 }

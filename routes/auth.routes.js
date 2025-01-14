@@ -93,7 +93,8 @@ router.post("/login", async(req, res, next) => {
 
     const payload = {
       _id: usuarioEncontrado._id,
-      email: usuarioEncontrado.email
+      email: usuarioEncontrado.email,
+      role: usuarioEncontrado.role
     } // el payload es toda información estatica y unica que identifica al usuario
 
     const tokenConfig = {
